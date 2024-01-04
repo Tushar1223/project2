@@ -262,7 +262,6 @@ exports.deleteMyProfile = async (req, res) => {
       follower.following.splice(index, 1);
       await follower.save();
     }
-
     // Removing User from Following's Followers
     for (let i = 0; i < following.length; i++) {
       const follows = await User.findById(following[i]);
@@ -277,22 +276,22 @@ exports.deleteMyProfile = async (req, res) => {
 
     for (let i = 0; i < allPosts.length; i++) {
       const post = await Post.findById(allPosts[i]._id);
-
       for (let j = 0; j < post.comments.length; j++) {
-        if (post.comments[j].user === userId) {
+        
+        if (JSON.stringify(post.comments[j].user) ===JSON.stringify(userId)  ) {
           post.comments.splice(j, 1);
         }
       }
-      await post.markModified('comments');
       await post.save();
     }
+
     // removing all likes of the user from all posts
 
     for (let i = 0; i < allPosts.length; i++) {
       const post = await Post.findById(allPosts[i]._id);
 
       for (let j = 0; j < post.likes.length; j++) {
-        if (post.likes[j] === userId) {
+        if (JSON.stringify(post.likes[j]) === JSON.stringify(userId)) {
           post.likes.splice(j, 1);
         }
       }

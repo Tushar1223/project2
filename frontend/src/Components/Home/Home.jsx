@@ -68,7 +68,7 @@ const Home = () => {
             />
           ))
         ) : (
-          <Typography variant="h6" style={{color: "red"}} color="textPrimary">No posts yet</Typography>
+          <Typography variant="h5">No posts yet</Typography>
         )}
       </div>
       <div className="homeright">
@@ -84,7 +84,7 @@ const Home = () => {
         )}
        
      
-      <Typography variant="h6" color={"grey"}>Suggested for you</Typography>
+      <Typography variant="h6" style={{color: "grey"}}>Suggested for you</Typography>
         {users && users.length > 0 ? (
           users.map((e) => (
             e._id !== user._id
